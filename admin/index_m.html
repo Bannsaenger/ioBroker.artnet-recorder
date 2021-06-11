@@ -41,6 +41,14 @@
             onChange(false);
             // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
             if (M) M.updateTextFields();
+
+            getIPs(function (ips) {
+                for (var i = 0; i < ips.length; i++) {
+                    if (ips[i].name.includes('[IPv6]')) continue;
+                    $('#bind').append('<option value="' + ips[i].address + '">' + ips[i].name + '</option>');
+                }
+                $('#bind.value').val(settings.bind).select();
+            });
         }
 
         // This will be called by the admin adapter when the user presses the save button
@@ -71,23 +79,46 @@
             </div>
         </div>
 
-        <!-- Put your content here -->
-
-        <!-- For example columns with settings: -->
+        <!-- columns with settings: -->
         <div class="row">
-            <div class="col s6 input-field">
-                <input type="checkbox" class="value" id="option1" />
-                <label for="option1" class="translate">option1</label>
+            <div class="col s12 m6 l4 input-field">
+                <select class="value" id="bind"></select>
+                <label class="translate" for="bind">bind</label>
             </div>
 
-            <div class="col s6 input-field">
-                <input type="text" class="value" id="option2" />
-                <label for="option2" class="translate">option2</label>
+            <div class="col s12 m6 l2 input-field">
+                <input type="number" min="1" max="65565" class="value" id="port" />
+                <label for="port" class="translate">UDP Port</label>
             </div>
         </div>
 
-    </div>
+        <div class="row">
+            <div class="col s12 m6 l2 input-field">
+                <input type="number" min="0" max="127" class="value" id="net"></select>
+                <label class="translate" for="net">net</label>
+            </div>
+            <div class="col s12 m6 l2 input-field">
+                <input type="number" min="0" max="15" class="value" id="subNet"></select>
+                <label class="translate" for="subNet">subNet</label>
+            </div>
+            <div class="col s12 m6 l2 input-field">
+                <input type="number" min="0" max="15" class="value" id="universe"></select>
+                <label class="translate" for="universe">universe</label>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col s12 m6 l3 input-field">
+                <input type="number" min="1" max="10000" class="value" id="packetDelay"></select>
+                <label class="translate" for="packetDelay">packetDelay</label>
+            </div>
+
+            <div class="col s12 m6 l3 input-field">
+                <input type="number" min="2" max="512" step="8" class="value" id="maxDmxAddress"></select>
+                <label class="translate" for="maxDmxAddress">maxDmxAddress</label>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,55 @@
+{
+    "common": [
+        {
+            "_id": "control",
+            "type": "channel",
+            "common": {
+                "name": "Physical devices"
+            },
+            "native": {}
+        }
+    ],
+    "control": [
+        {
+            "_id": "mode",
+            "type": "state",
+            "common": {
+                "role": "value",
+                "name": "Mode to operate",
+                "type": "string",
+                "states": "Off;Record;Playback",
+                "read": true,
+                "write": true,
+                "def": "Off"
+            },
+            "native": {}
+        },
+        {
+            "_id": "merge",
+            "type": "state",
+            "common": {
+                "role": "value",
+                "name": "Type of merging method",
+                "type": "string",
+                "states": "Off;LTP;HTP",
+                "read": true,
+                "write": true,
+                "def": "Off"
+            },
+            "native": {}
+        },
+        {
+            "_id": "file",
+            "type": "state",
+            "common": {
+                "role": "value",
+                "name": "File for playback (should be in the userdata folder, subfolder /artnet-recorder)",
+                "type": "string",
+                "read": true,
+                "write": true,
+                "def": ""
+            },
+            "native": {}
+        }
+    ]
+}

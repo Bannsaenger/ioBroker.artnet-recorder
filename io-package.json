@@ -19,7 +19,7 @@
         "title": "Art-Net Recorder and Player",
         "titleLang": {
             "en": "Art-Net Recorder and Player",
-            "de": "Art-Net-Recorder und -Player",
+            "de": "Art-Net Recorder und Player",
             "ru": "Рекордер и плеер Art-Net",
             "pt": "Gravador e reprodutor Art-Net",
             "nl": "Art-Net-recorder en speler",
@@ -64,7 +64,7 @@
             "singleton": true,
             "name": {
                 "en": "Art-Net Recorder and Player",
-                "de": "Art-Net-Recorder und -Player",
+                "de": "Art-Net Recorder und Player",
                 "ru": "Рекордер и плеер Art-Net",
                 "pt": "Gravador e reprodutor Art-Net",
                 "nl": "Art-Net-recorder en speler",
@@ -80,13 +80,18 @@
         "supportCustoms": true,
         "dependencies": [
             {
-                "js-controller": ">=1.4.2"
+                "js-controller": ">=2.0.0"
             }
         ]
     },
     "native": {
-        "option1": true,
-        "option2": "42"
+        "port": 6454,
+        "bind": "0.0.0.0",
+        "net": 0,
+        "subNet": 0,
+        "universe": 0,
+        "packetDelay": 40,
+        "maxDmxAddress": 512
     },
     "objects": [],
     "instanceObjects": [
