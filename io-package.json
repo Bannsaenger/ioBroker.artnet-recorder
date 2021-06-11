@@ -1,0 +1,115 @@
+{
+    "common": {
+        "name": "artnet-recorder",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "Art-Net Recorder and Player",
+        "titleLang": {
+            "en": "Art-Net Recorder and Player",
+            "de": "Art-Net-Recorder und -Player",
+            "ru": "Рекордер и плеер Art-Net",
+            "pt": "Gravador e reprodutor Art-Net",
+            "nl": "Art-Net-recorder en speler",
+            "fr": "Enregistreur et lecteur Art-Net",
+            "it": "Registratore e lettore Art-Net",
+            "es": "Grabador y reproductor Art-Net",
+            "pl": "Rejestrator i odtwarzacz Art-Net",
+            "zh-cn": "Art-Net 录音机和播放器"
+        },
+        "desc": {
+            "en": "Record Art-Net data to a file for later playback",
+            "de": "Art-Net-Daten zur späteren Wiedergabe in einer Datei aufzeichnen",
+            "ru": "Запишите данные Art-Net в файл для последующего воспроизведения",
+            "pt": "Grave dados Art-Net em um arquivo para reprodução posterior",
+            "nl": "Art-Net-gegevens opnemen in een bestand om later af te spelen",
+            "fr": "Enregistrez les données Art-Net dans un fichier pour une lecture ultérieure",
+            "it": "Registra i dati Art-Net in un file per la riproduzione successiva",
+            "es": "Grabe los datos de Art-Net en un archivo para su posterior reproducción",
+            "pl": "Nagraj dane Art-Net do pliku w celu późniejszego odtworzenia",
+            "zh-cn": "将 Art-Net 数据记录到文件中供以后播放"
+        },
+        "authors": [
+            "Bannsaenger <bannsaenger@gmx.de>"
+        ],
+        "keywords": [
+            "art-net"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "artnet-recorder.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/Bannsaenger/ioBroker.artnet-recorder/master/admin/artnet-recorder.png",
+        "readme": "https://github.com/Bannsaenger/ioBroker.artnet-recorder/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "lighting",
+        "compact": true,
+        "materialize": true,
+        "materializeTab": true,
+        "adminTab": {
+            "singleton": true,
+            "name": {
+                "en": "Art-Net Recorder and Player",
+                "de": "Art-Net-Recorder und -Player",
+                "ru": "Рекордер и плеер Art-Net",
+                "pt": "Gravador e reprodutor Art-Net",
+                "nl": "Art-Net-recorder en speler",
+                "fr": "Enregistreur et lecteur Art-Net",
+                "it": "Registratore e lettore Art-Net",
+                "es": "Grabador y reproductor Art-Net",
+                "pl": "Rejestrator i odtwarzacz Art-Net",
+                "zh-cn": "Art-Net 录音机和播放器"
+            },
+            "link": "",
+            "fa-icon": "info"
+        },
+        "supportCustoms": true,
+        "dependencies": [
+            {
+                "js-controller": ">=1.4.2"
+            }
+        ]
+    },
+    "native": {
+        "option1": true,
+        "option2": "42"
+    },
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "Device or service connected",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
+    ]
+}
