@@ -4,7 +4,7 @@
             "_id": "control",
             "type": "channel",
             "common": {
-                "name": "Physical devices"
+                "name": "recorder controls"
             },
             "native": {}
         }
@@ -16,11 +16,24 @@
             "common": {
                 "role": "value",
                 "name": "Mode to operate",
-                "type": "string",
-                "states": "Off;Record;Playback",
+                "type": "number",
+                "states": "0:Off;1:Record;2:Playback",
                 "read": true,
                 "write": true,
-                "def": "Off"
+                "def": 0
+            },
+            "native": {}
+        },
+        {
+            "_id": "playbackLoop",
+            "type": "state",
+            "common": {
+                "role": "value",
+                "name": "infinitively loop the playback",
+                "type": "boolean",
+                "read": true,
+                "write": true,
+                "def": false
             },
             "native": {}
         },
@@ -30,11 +43,24 @@
             "common": {
                 "role": "value",
                 "name": "Type of merging method",
-                "type": "string",
-                "states": "Off;LTP;HTP",
+                "type": "number",
+                "states": "0:Off;1:LTP (Latest Takes Precedence);2:HTP (Highest Takes Precedence)",
                 "read": true,
                 "write": true,
-                "def": "Off"
+                "def": 0
+            },
+            "native": {}
+        },
+        {
+            "_id": "workingDir",
+            "type": "state",
+            "common": {
+                "role": "value",
+                "name": "Folder for storage of recorded files",
+                "type": "string",
+                "read": true,
+                "write": true,
+                "def": "."
             },
             "native": {}
         },
@@ -43,7 +69,7 @@
             "type": "state",
             "common": {
                 "role": "value",
-                "name": "File for playback (should be in the userdata folder, subfolder /artnet-recorder)",
+                "name": "File for playback (should be in the workingDir)",
                 "type": "string",
                 "read": true,
                 "write": true,
