@@ -57,6 +57,8 @@
         "loglevel": "info",
         "mode": "daemon",
         "type": "lighting",
+        "connectionType": "local",
+        "dataSource": "push",
         "compact": true,
         "materialize": true,
         "materializeTab": true,
