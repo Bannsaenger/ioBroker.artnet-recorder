@@ -42,9 +42,9 @@
             "type": "state",
             "common": {
                 "role": "value",
-                "name": "Type of merging method",
+                "name": "Type of merging method when adding the send data to the buffer",
                 "type": "number",
-                "states": "0:Off;1:LTP (Latest Takes Precedence);2:HTP (Highest Takes Precedence)",
+                "states": "0:LTP (Latest Takes Precedence);1:HTP (Highest Takes Precedence)",
                 "read": true,
                 "write": true,
                 "def": 0

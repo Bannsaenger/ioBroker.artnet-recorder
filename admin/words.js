@@ -65,28 +65,28 @@ systemDictionary = {
         'zh-cn': '使用过的 DMX 宇宙'
     },
     'packetDelay': {
-        'en': 'packet delay (in ms)',
-        'de': 'Paketverzögerung (in ms)',
-        'ru': 'задержка пакета (в мс)',
-        'pt': 'atraso de pacote (em ms)',
-        'nl': 'pakketvertraging (in ms)',
-        'fr': 'délai de paquet (en ms)',
-        'it': 'ritardo del pacchetto (in ms)',
-        'es': 'retardo de paquete (en ms)',
-        'pl': 'opóźnienie pakietu (w ms)',
-        'zh-cn': '数据包延迟（以毫秒为单位）'
+        'en': 'packet lookup timer (in ms)',
+        'de': 'Timer zur Suche neuer Packete (in ms)',
+        'ru': 'таймер поиска пакетов (в мс)',
+        'pt': 'temporizador de procura de pacote (em ms)',
+        'nl': 'pakketopzoektimer (in ms)',
+        'fr': 'minuteur de recherche de paquets (en ms)',
+        'it': 'timer di ricerca dei pacchetti (in ms)',
+        'es': 'temporizador de búsqueda de paquetes (en ms)',
+        'pl': 'licznik czasu wyszukiwania pakietów (w ms)',
+        'zh-cn': '数据包查找计时器（以毫秒为单位）'
     },
     'packetDelay_tooltip': {
-        'en': '40 ms corresponds to 25 ArtDMX packets per second. Number of packets = 1000 divided by packet delay',
-        'de': '40 ms entsprechen 25 ArtDMX-Paketen pro Sekunde. Anzahl Pakete = 1000 geteilt durch Paketverzögerung',
-        'ru': '40 мс соответствуют 25 пакетам ArtDMX в секунду. Количество пакетов = 1000, разделенное на задержку пакета',
-        'pt': '40 ms correspondem a 25 pacotes ArtDMX por segundo. Número de pacotes = 1000 dividido pelo atraso do pacote',
-        'nl': '40 ms komt overeen met 25 ArtDMX-pakketten per seconde. Aantal pakketten = 1000 gedeeld door pakketvertraging',
-        'fr': '40 ms correspondent à 25 paquets ArtDMX par seconde. Nombre de paquets = 1000 divisé par le délai de paquet',
-        'it': '40 ms corrispondono a 25 pacchetti ArtDMX al secondo. Numero di pacchetti = 1000 diviso per ritardo pacchetto packet',
-        'es': '40 ms corresponde a 25 paquetes ArtDMX por segundo. Número de paquetes = 1000 dividido por el retraso del paquete',
-        'pl': '40 ms odpowiada 25 pakietom ArtDMX na sekundę. Liczba pakietów = 1000 podzielone przez opóźnienie pakietu',
-        'zh-cn': '40 毫秒对应于每秒 25 个 ArtDMX 数据包。数据包数 = 1000 除以数据包延迟'
+        'en': '40 ms corresponds to a maximum of 25 ArtDMX packets per second. Number of packets = 1000 divided by packet delay. Better the half time',
+        'de': '40 ms entsprechen maximal 25 ArtDMX-Paketen pro Sekunde. Anzahl Pakete = 1000 geteilt durch Paketverzögerung. Besser die halbe Zeit',
+        'ru': '40 мс соответствуют максимум 25 пакетам ArtDMX в секунду. Количество пакетов = 1000, разделенное на задержку пакета. Лучше перерыв',
+        'pt': '40 ms correspondem a um máximo de 25 pacotes ArtDMX por segundo. Número de pacotes = 1000 dividido pelo atraso do pacote. Melhor no intervalo',
+        'nl': '40 ms komt overeen met maximaal 25 ArtDMX-pakketten per seconde. Aantal pakketten = 1000 gedeeld door pakketvertraging. Beter de rust',
+        'fr': '40 ms correspondent à un maximum de 25 paquets ArtDMX par seconde. Nombre de paquets = 1000 divisé par le délai de paquet. Mieux vaut la mi-temps',
+        'it': '40 ms corrispondono a un massimo di 25 pacchetti ArtDMX al secondo. Numero di pacchetti = 1000 diviso per il ritardo del pacchetto. Meglio l\'intervallo',
+        'es': '40 ms corresponde a un máximo de 25 paquetes ArtDMX por segundo. Número de paquetes = 1000 dividido por el retraso del paquete. Mejor el medio tiempo',
+        'pl': '40 ms odpowiada maksymalnie 25 pakietom ArtDMX na sekundę. Liczba pakietów = 1000 podzielone przez opóźnienie pakietu. Lepiej pół etatu',
+        'zh-cn': '40 ms 对应每秒最多 25 个 ArtDMX 数据包。数据包数 = 1000 除以数据包延迟。半场更好'
     },
     'maxDmxAddress': {
         'en': 'maximum DMX address which will be sent and received',

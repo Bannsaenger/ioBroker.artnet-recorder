@@ -90,7 +90,7 @@
         "net": 0,
         "subNet": 0,
         "universe": 0,
-        "packetDelay": 40,
+        "packetDelay": 10,
         "maxDmxAddress": 512
     },
     "objects": [],
