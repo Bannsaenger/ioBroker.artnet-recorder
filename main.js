@@ -227,7 +227,7 @@ class ArtnetRecorder extends utils.Adapter {
             const msgUniverse = msg[14] & 0x0F;
             const msgLength   = msg[16] * 256 + msg[17];
             if ((msgNet == self.config.net) && (msgSubNet == self.config.subNet) && (msgUniverse == self.config.universe)) {
-                self.log.debug(`Art-Net Recorder received packet with ${msg.length} bytes from ${info.address}:${info.port} -> sequence: ${msgSequence}, physical: ${msgPhysical}, universe: '${msgNet}:${msgSubNet}:${msgUniverse} (${msgNet * 256 + msgSubNet * 16 + msgUniverse})', length: ${msgLength} DMX values`);
+                self.log.silly(`Art-Net Recorder received packet with ${msg.length} bytes from ${info.address}:${info.port} -> sequence: ${msgSequence}, physical: ${msgPhysical}, universe: '${msgNet}:${msgSubNet}:${msgUniverse} (${msgNet * 256 + msgSubNet * 16 + msgUniverse})', length: ${msgLength} DMX values`);
             } else {
                 self.log.silly(`Art-Net Recorder received packet with ${msg.length} bytes from ${info.address}:${info.port} -> sequence: ${msgSequence}, physical: ${msgPhysical}, universe: '${msgNet}:${msgSubNet}:${msgUniverse} (${msgNet * 256 + msgSubNet * 16 + msgUniverse})', length: ${msgLength} DMX values. Universe or Net mismatch. Ignoring`);
                 return;
@@ -258,7 +258,7 @@ class ArtnetRecorder extends utils.Adapter {
                 const locStr = JSON.stringify({[locRecTime] : dmxValsChanged});
                 fs.appendFile(self.recFile, `${locStr}\n`, (err) => {
                     if (err) throw err;
-                    this.log.silly(`Art-Net Recorder append now to record file '${locStr}'`);
+                    this.log.debug(`Art-Net Recorder append now to record file '${locStr}'`);
                 });
             }
             self.artNetBuffer = dmxVals;        // remember the actual DMX value image
@@ -429,6 +429,7 @@ class ArtnetRecorder extends utils.Adapter {
             const locFileName = `${locYear}${locMonth}${locDay}_${locHours}${locMinutes}${locSeconds}_Art-Net_Record.rec`;
             // file will be opened and appended on packet receiving
             self.recFile = `${self.workingDir}/${locFileName}`;
+            self.recStartTime = undefined;          // reset for first recording
             self.log.error(`Art-Net Recorder create filename: '${locFileName}' for recording`);
         } catch (err) {
             self.errorHandler(err, 'createRecordFile');
