@@ -15,6 +15,9 @@
     "type": "git",
     "url": "https://github.com/Bannsaenger/ioBroker.artnet-recorder"
   },
+  "engines": {
+    "node": ">=12.x"
+  },
   "dependencies": {
     "@iobroker/adapter-core": "^2.5.1",
     "n-readlines": "^1.0.1"
