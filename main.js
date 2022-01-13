@@ -23,7 +23,7 @@ const udp = require('dgram');
 // @ts-ignore
 const lineByLine = require('n-readlines');
 const { TIMEOUT } = require('dns');
-const { setTimeout } = require('timers');
+//const { setTimeout } = require('timers');
 //const path = require('path');
 
 class ArtnetRecorder extends utils.Adapter {
@@ -65,7 +65,9 @@ class ArtnetRecorder extends utils.Adapter {
         this.plyFile = '';                                                                      // the file which is opened for playback
         this.mergeMode = 0;                                                                     // 0 = LTP, 1 = HTP
         this.liner = undefined;                                                                 // holds the lineByLine object
-        this.tmrSendTimer = new NodeJS.Timeout();                                               // holds the send timer for clear in unload
+        this.tmrSendTimer = setTimeout(() => {
+            });
+        this.tmrSendTimer.unref();                                                              // holds the send timer for clear in unload
 
         // creating a udp server
         this.server = udp.createSocket('udp4');
