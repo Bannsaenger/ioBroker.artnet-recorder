@@ -31,6 +31,9 @@ The interval or the stepping to send the data ist set by the configuartion.
 ### 0.0.2
 * (Bannsaenger) added engine and prepared for review
 
+### 0.0.3
+* (Bannsaenger) fixed comments from code review
+
 ## License
 MIT License
 

@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "artnet-recorder",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "news": {
             "0.0.1": {
                 "en": "initial release",
@@ -17,6 +17,9 @@
             },
             "0.0.2": {
                 "en": "added engine and prepared for review"
+            },
+            "0.0.3": {
+                "en": "fixed comments from code review"
             }
         },
         "title": "Art-Net Recorder and Player",
@@ -64,24 +67,6 @@
         "dataSource": "push",
         "compact": true,
         "materialize": true,
-        "materializeTab": true,
-        "adminTab": {
-            "singleton": true,
-            "name": {
-                "en": "Art-Net Recorder and Player",
-                "de": "Art-Net Recorder und Player",
-                "ru": "Рекордер и плеер Art-Net",
-                "pt": "Gravador e reprodutor Art-Net",
-                "nl": "Art-Net-recorder en speler",
-                "fr": "Enregistreur et lecteur Art-Net",
-                "it": "Registratore e lettore Art-Net",
-                "es": "Grabador y reproductor Art-Net",
-                "pl": "Rejestrator i odtwarzacz Art-Net",
-                "zh-cn": "Art-Net 录音机和播放器"
-            },
-            "link": "",
-            "fa-icon": "info"
-        },
         "supportCustoms": true,
         "dependencies": [
             {

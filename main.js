@@ -20,7 +20,10 @@ const utils = require('@iobroker/adapter-core');
 // Load your modules here, e.g.:
 const fs = require('fs');
 const udp = require('dgram');
+// @ts-ignore
 const lineByLine = require('n-readlines');
+const { TIMEOUT } = require('dns');
+const { setTimeout } = require('timers');
 //const path = require('path');
 
 class ArtnetRecorder extends utils.Adapter {
@@ -50,19 +53,19 @@ class ArtnetRecorder extends utils.Adapter {
         this.recordRunning = false;                                                             // true if recording process is running
         this.recordStartTime = 0;                                                               // takes the time when recording has started
         this.playbackRunning = false;                                                           // true if a playback is in progress
-        this.artNetBuffer = undefined;                                                          // filled later
+        this.artNetBuffer = new Uint8Array();                                                   // filled later
         this.workingDir = '';                                                                   // filled with the working directory
         this.canRecord = true;                                                                  // false if working directory is not writable
         this.recFile = '';                                                                      // the file which is opened for recording
-        this.recStartTime = undefined;                                                          // the time in msec when the record is started for calculating the offset in the record file
-        this.nextPacketToSend = '';                                                             // the next packet to send in send mode
-        this.nextPacketTime = undefined;                                                        // and the time to do this
-        this.plyStartTime = undefined;                                                          // inluding the time offset to the start of the play mode
+        this.recStartTime = 0;                                                                  // the time in msec when the record is started for calculating the offset in the record file
+        this.nextPacketToSend = [];                                                             // the next packet to send in send mode
+        this.nextPacketTime = 0;                                                                // and the time to do this
+        this.plyStartTime = 0;                                                                  // inluding the time offset to the start of the play mode
         this.plyLoop = false;                                                                   // play the file in a loop till playing is switched off ?
         this.plyFile = '';                                                                      // the file which is opened for playback
         this.mergeMode = 0;                                                                     // 0 = LTP, 1 = HTP
         this.liner = undefined;                                                                 // holds the lineByLine object
-        this.tmrSendTimer = undefined;                                                          // holds the send timer for clear in unload
+        this.tmrSendTimer = new NodeJS.Timeout();                                               // holds the send timer for clear in unload
 
         // creating a udp server
         this.server = udp.createSocket('udp4');
@@ -72,23 +75,22 @@ class ArtnetRecorder extends utils.Adapter {
      * Is called when databases are connected and adapter received configuration.
      */
     async onReady() {
-        const self = this;
         try {
             // Initialize your adapter here
             // Reset the connection indicator during startup
-            self.setState('info.connection', false, true);
+            this.setState('info.connection', false, true);
 
             // emits when any error occurs
-            self.server.on('error', self.onServerError.bind(self));
+            this.server.on('error', this.onServerError.bind(this));
 
             // emits when socket is ready and listening for datagram msgs
-            self.server.on('listening', self.onServerListening.bind(self));
+            this.server.on('listening', this.onServerListening.bind(this));
 
             // emits after the socket is closed using socket.close();
-            self.server.on('close', self.onServerClose.bind(self));
+            this.server.on('close', this.onServerClose.bind(this));
 
             // emits on new datagram msg
-            self.server.on('message', self.onServerMessage.bind(self));
+            this.server.on('message', this.onServerMessage.bind(this));
 
             // The adapters config (in the instance object everything under the attribute 'native' is accessible via
             // this.config:
@@ -96,62 +98,59 @@ class ArtnetRecorder extends utils.Adapter {
             /*
             * For every state in the system there has to be also an object of type state
             */
-            for (const element of self.objectsTemplate.common) {
-                await self.setObjectNotExistsAsync(element._id, element);
+            for (const element of this.objectsTemplate.common) {
+                await this.setObjectNotExistsAsync(element._id, element);
             }
-            for (const element of self.objectsTemplate.control) {
-                await self.setObjectNotExistsAsync(`control.${element._id}`, element);
+            for (const element of this.objectsTemplate.control) {
+                await this.setObjectNotExistsAsync(`control.${element._id}`, element);
             }
 
-            self.artNetBuffer = Buffer.alloc(Number(self.config.maxDmxAddress));    // create a internal buffer
+            this.artNetBuffer = Buffer.alloc(Number(this.config.maxDmxAddress));    // create a internal buffer
 
             // In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
             // Or, if you really must, you can also watch all states. Don't do this if you don't need to. Otherwise this will cause a lot of unnecessary load on the system:
-            self.subscribeStates('*');
+            this.subscribeStates('*');
 
             // try to open open configured server port
-            self.log.info('Bind UDP socket to: "' + self.config.bind + ':' + self.config.port + '"');
-            self.server.bind(self.config.port, self.config.bind);
+            this.log.info('Bind UDP socket to: "' + this.config.bind + ':' + this.config.port + '"');
+            this.server.bind(this.config.port, this.config.bind);
 
             // check if the given workingDirectory exists.
 
-            let tmpObj = await self.getStateAsync('control.workingDir');
-            // @ts-ignore
-            self.workingDir = (tmpObj && tmpObj.val) ? tmpObj.val.toString() : '.';
+            let tmpObj = await this.getStateAsync('control.workingDir');
+            this.workingDir = (tmpObj && tmpObj.val) ? tmpObj.val.toString() : utils.getAbsoluteInstanceDataDir(this);
 
-            tmpObj = await self.getStateAsync('control.playbackLoop');
-            // @ts-ignore
-            self.plyLoop = (tmpObj && tmpObj.val) ? Boolean(tmpObj.val) : false;
+            tmpObj = await this.getStateAsync('control.playbackLoop');
+            this.plyLoop = (tmpObj && tmpObj.val) ? Boolean(tmpObj.val) : false;
 
-            tmpObj = await self.getStateAsync('control.merge');
-            // @ts-ignore
-            self.mergeMode = (tmpObj && tmpObj.val) ? Number(tmpObj.val) : 0;
+            tmpObj = await this.getStateAsync('control.merge');
+            this.mergeMode = (tmpObj && tmpObj.val) ? Number(tmpObj.val) : 0;
 
-            if (fs.existsSync(self.workingDir)) {
-                const locWritable = await fs.accessSync(self.workingDir, fs.constants.R_OK | fs.constants.W_OK);
+            if (fs.existsSync(this.workingDir)) {
+                const locWritable = await fs.accessSync(this.workingDir, fs.constants.R_OK | fs.constants.W_OK);
                 if (locWritable == undefined) {
-                    self.log.info(`Art-Net Recorder working directory: ${self.workingDir} exists and is writable.`);
+                    this.log.info(`Art-Net Recorder working directory: ${this.workingDir} exists and is writable.`);
                 } else {
-                    self.log.info(`Art-Net Recorder working directory: ${self.workingDir} exists but is not writable. Recording not possible.`);
-                    self.canRecord = false;
+                    this.log.info(`Art-Net Recorder working directory: ${this.workingDir} exists but is not writable. Recording not possible.`);
+                    this.canRecord = false;
                 }
             } else {
-                self.log.error(`Art-Net Recorder working directory: ${self.workingDir} did not exist. Terminating`);
-                self.terminate();
+                this.log.error(`Art-Net Recorder working directory: ${this.workingDir} did not exist. Terminating`);
+                this.terminate();
             }
 
             // reset the mode on startup
-            self.setState('control.mode', 0, true);
+            this.setState('control.mode', 0, true);
 
             // last thing to do is to start the onSendTimer
-            self.tmrSendTimer = setInterval(self.onSendTimer.bind(self), self.config.packetDelay);
+            this.tmrSendTimer = setInterval(this.onSendTimer.bind(this), this.config.packetDelay);
 
             // Set the connection indicator after startup
-            // self.setState('info.connection', true, true);
+            // this.setState('info.connection', true, true);
             // set by onServerListening
 
         } catch (err) {
-            self.errorHandler(err, 'onReady');
+            this.errorHandler(err, 'onReady');
         }
     }
 
@@ -171,16 +170,15 @@ class ArtnetRecorder extends utils.Adapter {
      * Is called when the server is ready to process traffic
      */
     onServerListening() {
-        const self = this;
         try {
-            const addr = self.server.address();
-            self.log.info('Art-Net Recorder server ready on <' + addr.address + '> port <' + addr.port + '> proto <' + addr.family + '>');
+            const addr = this.server.address();
+            this.log.info('Art-Net Recorder server ready on <' + addr.address + '> port <' + addr.port + '> proto <' + addr.family + '>');
             // maybe subject to change when switching to "real" Art-Net node
-            self.server.setBroadcast(true);
+            this.server.setBroadcast(true);
             // Set the connection indicator after server goes for listening
-            self.setState('info.connection', true, true);
+            this.setState('info.connection', true, true);
         } catch (err) {
-            self.errorHandler(err, 'onServerListening');
+            this.errorHandler(err, 'onServerListening');
         }
     }
 
@@ -197,27 +195,26 @@ class ArtnetRecorder extends utils.Adapter {
      * @param {Object} info     the info for e.g. address of sending host
      */
     async onServerMessage(msg, info) {
-        const self = this;
         try {
-            if (info.address === self.config.bind) return;         // packet from own address
+            if (info.address === this.config.bind) return;         // packet from own address
             if (msg.length > 530) {
-                self.log.debug(`Art-Net Recorder received packet with lenght > 530. Received length: ${msg.length}`);
+                this.log.debug(`Art-Net Recorder received packet with lenght > 530. Received length: ${msg.length}`);
                 return;
             }
             const msg_hex = msg.toString('hex').toUpperCase();
-            if (msg.slice(0, 8).compare(self.artNetHeader) != 0) {
-                self.log.debug(`Art-Net Recorder received packet with unknown header. Received header: '${msg.slice(0, 8).toString('hex').toUpperCase()}'`);
-                self.log.debug(`-> ${msg.length} bytes from ${info.address}:${info.port} : '${self.logHexData(msg_hex)}'`);
+            if (msg.slice(0, 8).compare(this.artNetHeader) != 0) {
+                this.log.debug(`Art-Net Recorder received packet with unknown header. Received header: '${msg.slice(0, 8).toString('hex').toUpperCase()}'`);
+                this.log.debug(`-> ${msg.length} bytes from ${info.address}:${info.port} : '${this.logHexData(msg_hex)}'`);
                 return;
             }
-            if (msg.slice(10, 12).compare(self.artNetVersion) != 0) {
-                self.log.debug(`Art-Net Recorder received packet with unknown version. Received version: '${msg.slice(10, 12).toString('hex').toUpperCase()}'`);
-                self.log.debug(`-> ${msg.length} bytes from ${info.address}:${info.port} : '${self.logHexData(msg_hex)}'`);
+            if (msg.slice(10, 12).compare(this.artNetVersion) != 0) {
+                this.log.debug(`Art-Net Recorder received packet with unknown version. Received version: '${msg.slice(10, 12).toString('hex').toUpperCase()}'`);
+                this.log.debug(`-> ${msg.length} bytes from ${info.address}:${info.port} : '${this.logHexData(msg_hex)}'`);
                 return;
             }
-            if (msg.slice(8, 10).compare(self.artNetOpcodecArtDMX) != 0) {
-                self.log.debug(`Art-Net Recorder received packet with unknown opcode. Received opcode: '${msg.slice(8, 10).toString('hex').toUpperCase()}'`);
-                self.log.debug(`-> ${msg.length} bytes from ${info.address}:${info.port} : '${self.logHexData(msg_hex)}'`);
+            if (msg.slice(8, 10).compare(this.artNetOpcodecArtDMX) != 0) {
+                this.log.debug(`Art-Net Recorder received packet with unknown opcode. Received opcode: '${msg.slice(8, 10).toString('hex').toUpperCase()}'`);
+                this.log.debug(`-> ${msg.length} bytes from ${info.address}:${info.port} : '${this.logHexData(msg_hex)}'`);
                 return;
             }
             const msgSequence = msg[12];
@@ -226,15 +223,15 @@ class ArtnetRecorder extends utils.Adapter {
             const msgSubNet = (msg[14] & 0xF0) >> 4;
             const msgUniverse = msg[14] & 0x0F;
             const msgLength   = msg[16] * 256 + msg[17];
-            if ((msgNet == self.config.net) && (msgSubNet == self.config.subNet) && (msgUniverse == self.config.universe)) {
-                self.log.silly(`Art-Net Recorder received packet with ${msg.length} bytes from ${info.address}:${info.port} -> sequence: ${msgSequence}, physical: ${msgPhysical}, universe: '${msgNet}:${msgSubNet}:${msgUniverse} (${msgNet * 256 + msgSubNet * 16 + msgUniverse})', length: ${msgLength} DMX values`);
+            if ((msgNet == this.config.net) && (msgSubNet == this.config.subNet) && (msgUniverse == this.config.universe)) {
+                this.log.silly(`Art-Net Recorder received packet with ${msg.length} bytes from ${info.address}:${info.port} -> sequence: ${msgSequence}, physical: ${msgPhysical}, universe: '${msgNet}:${msgSubNet}:${msgUniverse} (${msgNet * 256 + msgSubNet * 16 + msgUniverse})', length: ${msgLength} DMX values`);
             } else {
-                self.log.silly(`Art-Net Recorder received packet with ${msg.length} bytes from ${info.address}:${info.port} -> sequence: ${msgSequence}, physical: ${msgPhysical}, universe: '${msgNet}:${msgSubNet}:${msgUniverse} (${msgNet * 256 + msgSubNet * 16 + msgUniverse})', length: ${msgLength} DMX values. Universe or Net mismatch. Ignoring`);
+                this.log.silly(`Art-Net Recorder received packet with ${msg.length} bytes from ${info.address}:${info.port} -> sequence: ${msgSequence}, physical: ${msgPhysical}, universe: '${msgNet}:${msgSubNet}:${msgUniverse} (${msgNet * 256 + msgSubNet * 16 + msgUniverse})', length: ${msgLength} DMX values. Universe or Net mismatch. Ignoring`);
                 return;
             }
             const dmxVals = msg.slice(18, msg.length);
-            if (!self.recordRunning) {          // no recording in progress. Only save the buffer and return
-                self.artNetBuffer = dmxVals;
+            if (!this.recordRunning) {          // no recording in progress. Only save the buffer and return
+                this.artNetBuffer = dmxVals;
                 return;
             }
             // from here there is playback or record running. Check whether it is dirty against the buffer
@@ -242,29 +239,29 @@ class ArtnetRecorder extends utils.Adapter {
             let isDirty = false;
 
             for (let actBucket = 0; actBucket < dmxVals.length; actBucket++) {
-                if (dmxVals[actBucket] != self.artNetBuffer[actBucket]) {
+                if (dmxVals[actBucket] != this.artNetBuffer[actBucket]) {
                     isDirty = true;
                     dmxValsChanged.push({'channel': actBucket + 1, 'value': dmxVals[actBucket]});
                 }
             }
             if (isDirty) {
                 const locNow = Date.now();
-                if (self.recStartTime == undefined) {      // first record
-                    self.recStartTime = locNow;
+                if (this.recStartTime == 0) {      // first record
+                    this.recStartTime = locNow;
                 }
                 // eslint-disable-next-line no-unused-vars
-                const locRecTime = locNow - self.recStartTime;
+                const locRecTime = locNow - this.recStartTime;
                 //const locObj = {};
                 const locStr = JSON.stringify({[locRecTime] : dmxValsChanged});
-                fs.appendFile(self.recFile, `${locStr}\n`, (err) => {
+                fs.appendFile(this.recFile, `${locStr}\n`, (err) => {
                     if (err) throw err;
                     this.log.debug(`Art-Net Recorder append now to record file '${locStr}'`);
                 });
             }
-            self.artNetBuffer = dmxVals;        // remember the actual DMX value image
+            this.artNetBuffer = dmxVals;        // remember the actual DMX value image
 
         } catch (err) {
-            self.errorHandler(err, 'onServerMessage');
+            this.errorHandler(err, 'onServerMessage');
         }
     }
 
@@ -272,48 +269,47 @@ class ArtnetRecorder extends utils.Adapter {
      * Is cyclic called by the send timer to lookup for new packets to send in sendmode
      */
     onSendTimer() {
-        const self = this;
         let tmpStr, tmpObj;
         try {
-            if (!self.playbackRunning) return;              // only action is while playback is running
-            const locNow = Date.now() - self.plyStartTime;  // offset !
-            if (self.nextPacketTime < locNow) {   // send packet and get next
-                this.log.silly(`Art-Net Recorder send packet '${self.nextPacketTime}' on '${locNow}'`);
+            if (!this.playbackRunning) return;              // only action is while playback is running
+            const locNow = Date.now() - this.plyStartTime;  // offset !
+            if (this.nextPacketTime < locNow) {   // send packet and get next
+                this.log.silly(`Art-Net Recorder send packet '${this.nextPacketTime}' on '${locNow}'`);
                 // send packet
-                self.sendPacket();
+                this.sendPacket();
                 // get next packet or end playback
-                tmpStr = self.liner.next();
+                tmpStr = this.liner.next();
                 if (tmpStr) {
                     tmpObj = JSON.parse(tmpStr);
-                    self.nextPacketTime = Number(Object.keys(tmpObj)[0]);
-                    self.nextPacketToSend = tmpObj[self.nextPacketTime];
+                    this.nextPacketTime = Number(Object.keys(tmpObj)[0]);
+                    this.nextPacketToSend = tmpObj[this.nextPacketTime];
                 } else {
-                    if (self.plyLoop) {
-                        self.log.info(`Art-Net Recorder playback end, restart because of loop mode`);
-                        self.plyStartTime = Date.now();
-                        self.liner = new lineByLine(self.plyFile, {'readChunk': 15000, 'newLineCharacter': '\n'});
-                        tmpStr = self.liner.next();
+                    if (this.plyLoop) {
+                        this.log.info(`Art-Net Recorder playback end, restart because of loop mode`);
+                        this.plyStartTime = Date.now();
+                        this.liner = new lineByLine(this.plyFile, {'readChunk': 15000, 'newLineCharacter': '\n'});
+                        tmpStr = this.liner.next();
                         if (tmpStr) {
                             tmpObj = JSON.parse(tmpStr);
-                            self.nextPacketTime = Number(Object.keys(tmpObj)[0]);
-                            self.nextPacketToSend = tmpObj[self.nextPacketTime];
-                            self.plyStartTime = Date.now();
-                            self.playbackRunning = true;
+                            this.nextPacketTime = Number(Object.keys(tmpObj)[0]);
+                            this.nextPacketToSend = tmpObj[this.nextPacketTime];
+                            this.plyStartTime = Date.now();
+                            this.playbackRunning = true;
                         } else {
-                            self.log.error(`Art-Net Recorder error: File '${self.plyFile}' is now empty or corrupted. No playback possible`);
-                            self.playbackRunning = false;
-                            if (self.liner) self.liner.close();     // close playback file if open
+                            this.log.error(`Art-Net Recorder error: File '${this.plyFile}' is now empty or corrupted. No playback possible`);
+                            this.playbackRunning = false;
+                            if (this.liner) this.liner.close();     // close playback file if open
                         }
                     } else {
-                        self.log.info(`Art-Net Recorder ended playback`);
-                        self.playbackRunning = false;
-                        self.setState('control.mode', 0, true);
+                        this.log.info(`Art-Net Recorder ended playback`);
+                        this.playbackRunning = false;
+                        this.setState('control.mode', 0, true);
                     }
                 }
 
             }
         } catch (err) {
-            self.errorHandler(err, 'onSendTimer');
+            this.errorHandler(err, 'onSendTimer');
         }
     }
 
@@ -323,7 +319,6 @@ class ArtnetRecorder extends utils.Adapter {
      * @param {ioBroker.State | null | undefined} state
      */
     async onStateChange(id, state) {
-        const self = this;
         let tmpObj;
         let tmpStr;
         try {
@@ -332,76 +327,75 @@ class ArtnetRecorder extends utils.Adapter {
                 // self.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
                 if (!state.ack) {                   // only react on not acknowledged state changes
                     if (state.lc === state.ts) {    // last changed and last updated equal then the value has changed
-                        self.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+                        this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
                         if (/mode/.test(id)) {
-                            self.log.info(`Art-Net Recorder mode ${id} changed to ${state.val}`);
-                            self.playbackRunning = false;
-                            self.recordRunning = false;
+                            this.log.info(`Art-Net Recorder mode ${id} changed to ${state.val}`);
+                            this.playbackRunning = false;
+                            this.recordRunning = false;
                             switch (state.val) {
                                 case 1:             // Record
-                                    if (self.canRecord) {
-                                        self.recordRunning = true;
-                                        self.createRecordFile();
-                                        self.log.info(`Art-Net Recorder switched to Record mode`);
-                                        if (self.liner) self.liner.close();     // close playback file if open
+                                    if (this.canRecord) {
+                                        this.recordRunning = true;
+                                        this.createRecordFile();
+                                        this.log.info(`Art-Net Recorder switched to Record mode`);
+                                        if (this.liner) this.liner.close();     // close playback file if open
                                     } else {
-                                        self.log.warn(`Art-Net Recorder can not record. No writable directory`);
-                                        self.setState('control.mode', 0, true);
+                                        this.log.warn(`Art-Net Recorder can not record. No writable directory`);
+                                        this.setState('control.mode', 0, true);
                                     }
                                     break;
 
                                 case 2:             // Playback
-                                    self.log.info(`Art-Net Recorder switched to Playback mode`);
-                                    tmpObj = await self.getStateAsync('control.file');
-                                    // @ts-ignore
-                                    self.plyFile = `${self.workingDir}/${(tmpObj && tmpObj.val) ? tmpObj.val.toString() : ''}`;
-                                    if (fs.existsSync(self.plyFile)) {
-                                        self.liner = new lineByLine(self.plyFile, {'readChunk': 15000, 'newLineCharacter': '\n'});
-                                        //self.liner.reset();             // when debugging there were sometimes strange effects
-                                        tmpStr = self.liner.next();
+                                this.log.info(`Art-Net Recorder switched to Playback mode`);
+                                    tmpObj = await this.getStateAsync('control.file');
+                                    this.plyFile = `${this.workingDir}/${(tmpObj && tmpObj.val) ? tmpObj.val.toString() : ''}`;
+                                    if (fs.existsSync(this.plyFile)) {
+                                        this.liner = new lineByLine(this.plyFile, {'readChunk': 15000, 'newLineCharacter': '\n'});
+                                        //this.liner.reset();             // when debugging there were sometimes strange effects
+                                        tmpStr = this.liner.next();
                                         if (tmpStr) {
                                             tmpObj = JSON.parse(tmpStr);
-                                            self.nextPacketTime = Number(Object.keys(tmpObj)[0]);
-                                            self.nextPacketToSend = tmpObj[self.nextPacketTime];
-                                            self.plyStartTime = Date.now();
-                                            self.playbackRunning = true;
+                                            this.nextPacketTime = Number(Object.keys(tmpObj)[0]);
+                                            this.nextPacketToSend = tmpObj[this.nextPacketTime];
+                                            this.plyStartTime = Date.now();
+                                            this.playbackRunning = true;
                                         } else {
-                                            self.log.error(`Art-Net Recorder error: File '${self.plyFile}' is empty or corrupted. No playback possible`);
-                                            self.playbackRunning = false;
-                                            if (self.liner) self.liner.close();     // close playback file if open
+                                            this.log.error(`Art-Net Recorder error: File '${this.plyFile}' is empty or corrupted. No playback possible`);
+                                            this.playbackRunning = false;
+                                            if (this.liner) this.liner.close();     // close playback file if open
                                         }
                                     } else {
-                                        self.log.error(`Art-Net Recorder error: File '${self.plyFile}' does not exist. No playback possible`);
-                                        self.playbackRunning = false;
-                                        self.setState('control.mode', 0, true);
+                                        this.log.error(`Art-Net Recorder error: File '${this.plyFile}' does not exist. No playback possible`);
+                                        this.playbackRunning = false;
+                                        this.setState('control.mode', 0, true);
                                     }
                                     break;
 
                                 default:
-                                    self.log.info(`Art-Net Recorder switched off`);
+                                    this.log.info(`Art-Net Recorder switched off`);
                             }
                         }
                         if (/workingDir/.test(id)) {
-                            self.log.info(`Art-Net Recorder changed working dir`);
-                            self.workingDir = state.val ? state.val.toString() : '';
+                            this.log.info(`Art-Net Recorder changed working dir`);
+                            this.workingDir = state.val ? state.val.toString() : '';
                         }
                         if (/playbackLoop/.test(id)) {
-                            self.log.info(`Art-Net Recorder changed loop mode`);
-                            self.plyLoop = state.val ? true : false;
+                            this.log.info(`Art-Net Recorder changed loop mode`);
+                            this.plyLoop = state.val ? true : false;
                         }
                         if (/merge/.test(id)) {
-                            self.log.info(`Art-Net Recorder changed merge mode`);
-                            self.mergeMode = Number(state.val);
+                            this.log.info(`Art-Net Recorder changed merge mode`);
+                            this.mergeMode = Number(state.val);
                         }
-                        self.log.debug(`state ${id} only updated not changed: ${state.val} (ack = ${state.ack})`);
+                        this.log.debug(`state ${id} only updated not changed: ${state.val} (ack = ${state.ack})`);
                     }
                 }
             } else {
                 // The state was deleted
-                self.log.info(`state ${id} deleted`);
+                this.log.info(`state ${id} deleted`);
             }
         } catch (err) {
-            self.errorHandler(err, 'onStateChange');
+            this.errorHandler(err, 'onStateChange');
         }
     }
 
@@ -409,7 +403,6 @@ class ArtnetRecorder extends utils.Adapter {
      * Called for creating a new file for recording
 	 */
     createRecordFile() {
-        const self = this;
         try {
             const locDateObj = new Date();
             // current date
@@ -428,11 +421,11 @@ class ArtnetRecorder extends utils.Adapter {
             // now create the filename
             const locFileName = `${locYear}${locMonth}${locDay}_${locHours}${locMinutes}${locSeconds}_Art-Net_Record.rec`;
             // file will be opened and appended on packet receiving
-            self.recFile = `${self.workingDir}/${locFileName}`;
-            self.recStartTime = undefined;          // reset for first recording
-            self.log.error(`Art-Net Recorder create filename: '${locFileName}' for recording`);
+            this.recFile = `${this.workingDir}/${locFileName}`;
+            this.recStartTime = 0;          // reset for first recording
+            this.log.error(`Art-Net Recorder create filename: '${locFileName}' for recording`);
         } catch (err) {
-            self.errorHandler(err, 'createRecordFile');
+            this.errorHandler(err, 'createRecordFile');
         }
     }
 
@@ -440,24 +433,20 @@ class ArtnetRecorder extends utils.Adapter {
      * Called for merging and sending a packet
 	 */
     sendPacket() {
-        const self = this;
         try {
             // merge nextPacketToSend to the dmx buffer depending on the merge mode
-            for (const element of self.nextPacketToSend) {
-                if (self.mergeMode) {           // if 0 (LTP) the provided values from the playback must be set
-                    // @ts-ignore
-                    self.artNetBuffer[element.channel - 1] = Number(element.value);
+            for (const element of this.nextPacketToSend) {
+                if (this.mergeMode) {           // if 0 (LTP) the provided values from the playback must be set
+                    this.artNetBuffer[element.channel - 1] = Number(element.value);
                 } else {                        // HTP only set value if it is bigger than the bufferd value
-                    // @ts-ignore
-                    if (self.artNetBuffer[element.channel - 1] < Number(element.value)) {
-                        // @ts-ignore
-                        self.artNetBuffer[element.channel - 1] = Number(element.value);
+                    if (this.artNetBuffer[element.channel - 1] < Number(element.value)) {
+                        this.artNetBuffer[element.channel - 1] = Number(element.value);
                     }
                 }
             }
-            self.server.send(self.getArtNetPacket(), self.config.port, '255.255.255.255');
+            this.server.send(this.getArtNetPacket(), this.config.port, '255.255.255.255');
         } catch (err) {
-            self.errorHandler(err, 'sendPacket');
+            this.errorHandler(err, 'sendPacket');
         }
     }
 
@@ -466,11 +455,10 @@ class ArtnetRecorder extends utils.Adapter {
      * @returns {Uint8Array}
 	 */
     getArtNetPacket() {
-        const self = this;
-        let locBuffer = self.artNetHeader;
+        let locBuffer = this.artNetHeader;
         try {
             locBuffer = Buffer.concat([locBuffer, new Uint8Array([0x00, 0x50])]);   // Opcode 0x5000 (ArtDMX)
-            locBuffer = Buffer.concat([locBuffer, self.artNetVersion]);             // Version 14
+            locBuffer = Buffer.concat([locBuffer, this.artNetVersion]);             // Version 14
             locBuffer = Buffer.concat([locBuffer, new Uint8Array([0x00, 0x00])]);   // Sequence and physical is 0 for now
             /*
             locBuffer = Buffer.concat([locBuffer, new Uint8Array([0x00, 0x00])]);   // Universe only 0 for now
@@ -480,12 +468,12 @@ class ArtnetRecorder extends utils.Adapter {
             const midiCommand = new Uint8Array([statusByte, Number(dataByte1), Number(dataByte2)]);
             */
             // Low Byte is Net, High Byte is Subnet and Universe (little endian !)
-            const universeHiByte = (Number(self.config.subNet) << 4) | Number(self.config.universe);
-            const lengthHiByte = Math.floor(Number(self.artNetBuffer.length) / 256).toFixed(0);
-            const lengthLoByte = Math.floor(Number(self.artNetBuffer.length) - (Number(lengthHiByte) * 256)).toFixed(0);
-            locBuffer = Buffer.concat([locBuffer, new Uint8Array([Number(universeHiByte), self.config.net, Number(lengthHiByte), Number(lengthLoByte)]), self.artNetBuffer]);
+            const universeHiByte = (Number(this.config.subNet) << 4) | Number(this.config.universe);
+            const lengthHiByte = Math.floor(Number(this.artNetBuffer.length) / 256).toFixed(0);
+            const lengthLoByte = Math.floor(Number(this.artNetBuffer.length) - (Number(lengthHiByte) * 256)).toFixed(0);
+            locBuffer = Buffer.concat([locBuffer, new Uint8Array([Number(universeHiByte), this.config.net, Number(lengthHiByte), Number(lengthLoByte)]), this.artNetBuffer]);
         } catch (err) {
-            self.errorHandler(err, 'getArtNetPacket');
+            this.errorHandler(err, 'getArtNetPacket');
         }
         return(locBuffer);
     }
@@ -536,17 +524,16 @@ class ArtnetRecorder extends utils.Adapter {
      */
     onUnload(callback) {
         try {
-            const self = this;
             // Reset the connection indicator
-            self.setState('info.connection', false, true);
+            this.setState('info.connection', false, true);
             // reset the mode
-            self.setState('control.mode', 0, true);
+            this.setState('control.mode', 0, true);
 
             // Here you must clear all timeouts or intervals that may still be active
-            clearInterval(self.tmrSendTimer);
+            clearInterval(this.tmrSendTimer);
 
             // close playback file if open
-            if (self.liner) self.liner.close();
+            if (this.liner) this.liner.close();
 
             // close the server port
             this.server.close(callback);
@@ -562,7 +549,7 @@ if (module.parent) {
     /**
      * @param {Partial<utils.AdapterOptions>} [options={}]
      */
-    module.exports = (options) => {'use strict';new ArtnetRecorder(options); };
+    module.exports = (options) => new ArtnetRecorder(options);
 } else {
     // otherwise start the instance directly
     new ArtnetRecorder();
