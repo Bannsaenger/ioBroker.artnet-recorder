@@ -67,7 +67,6 @@
         "dataSource": "push",
         "compact": true,
         "materialize": true,
-        "supportCustoms": true,
         "dependencies": [
             {
                 "js-controller": ">=2.0.0"
