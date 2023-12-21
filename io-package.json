@@ -1,140 +1,153 @@
 {
-    "common": {
-        "name": "artnet-recorder",
-        "version": "0.0.3",
-        "news": {
-            "0.0.1": {
-                "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版",
-                "uk": "початковий випуск"
-            },
-            "0.0.2": {
-                "en": "added engine and prepared for review",
-                "de": "Motor hinzugefügt und zur Überprüfung vorbereitet",
-                "ru": "добавлен движок и подготовлен к обзору",
-                "pt": "motor adicionado e preparado para revisão",
-                "nl": "motor toegevoegd en voorbereid voor beoordeling",
-                "fr": "moteur ajouté et préparé pour examen",
-                "it": "motore aggiunto e preparato per la revisione",
-                "es": "Motor añadido y preparado para revisión.",
-                "pl": "dodano silnik i przygotowano do przeglądu",
-                "uk": "додано движок і підготовлено до перегляду",
-                "zh-cn": "添加引擎并准备审查"
-            },
-            "0.0.3": {
-                "en": "fixed comments from code review",
-                "de": "Kommentare aus der Codeüberprüfung behoben",
-                "ru": "исправлены комментарии из проверки кода",
-                "pt": "comentários corrigidos da revisão de código",
-                "nl": "opgeloste opmerkingen van codebeoordeling",
-                "fr": "commentaires corrigés lors de la révision du code",
-                "it": "commenti corretti dalla revisione del codice",
-                "es": "comentarios fijos de la revisión del código",
-                "pl": "naprawiono komentarze z przeglądu kodu",
-                "uk": "виправлені коментарі під час перевірки коду",
-                "zh-cn": "修正了代码审查的评论"
-            }
-        },
-        "title": "Art-Net Recorder and Player",
-        "titleLang": {
-            "en": "Art-Net Recorder and Player",
-            "de": "Art-Net Recorder und Player",
-            "ru": "Рекордер и плеер Art-Net",
-            "pt": "Gravador e reprodutor Art-Net",
-            "nl": "Art-Net-recorder en speler",
-            "fr": "Enregistreur et lecteur Art-Net",
-            "it": "Registratore e lettore Art-Net",
-            "es": "Grabador y reproductor Art-Net",
-            "pl": "Rejestrator i odtwarzacz Art-Net",
-            "zh-cn": "Art-Net 录音机和播放器",
-            "uk": "Запис і програвач Art-Net"
-        },
-        "desc": {
-            "en": "Record Art-Net data to a file for later playback",
-            "de": "Art-Net-Daten zur späteren Wiedergabe in einer Datei aufzeichnen",
-            "ru": "Запишите данные Art-Net в файл для последующего воспроизведения",
-            "pt": "Grave dados Art-Net em um arquivo para reprodução posterior",
-            "nl": "Art-Net-gegevens opnemen in een bestand om later af te spelen",
-            "fr": "Enregistrez les données Art-Net dans un fichier pour une lecture ultérieure",
-            "it": "Registra i dati Art-Net in un file per la riproduzione successiva",
-            "es": "Grabe los datos de Art-Net en un archivo para su posterior reproducción",
-            "pl": "Nagraj dane Art-Net do pliku w celu późniejszego odtworzenia",
-            "zh-cn": "将 Art-Net 数据记录到文件中供以后播放",
-            "uk": "Запишіть дані Art-Net у файл для подальшого відтворення"
-        },
-        "authors": [
-            "Bannsaenger <bannsaenger@gmx.de>"
-        ],
-        "keywords": [
-            "art-net"
-        ],
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "main": "main.js",
-        "icon": "artnet-recorder.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/Bannsaenger/ioBroker.artnet-recorder/master/admin/artnet-recorder.png",
-        "readme": "https://github.com/Bannsaenger/ioBroker.artnet-recorder/blob/master/README.md",
-        "loglevel": "info",
-        "mode": "daemon",
-        "type": "lighting",
-        "connectionType": "local",
-        "dataSource": "push",
-        "compact": true,
-        "materialize": true,
-        "adminUI": {
-            "config": "json"
-        },
-        "dependencies": [
-            {
-                "js-controller": ">=3.3.19"
-            }
-        ],
-        "globalDependecies": [
-            {
-                "admin": ">=5.1.28"
-            }
-        ]
+  "common": {
+    "name": "artnet-recorder",
+    "version": "0.0.4",
+    "news": {
+      "0.0.4": {
+        "en": "updated dependencies\ngo to release script\ngo to json-config",
+        "de": "aktualisierte abhängigkeiten\ngo to release script\ngehen zu json-config",
+        "ru": "обновленные зависимости\nперейти к скрипту\nперейти на json-config",
+        "pt": "dependências atualizadas\nir para o script de lançamento\nir para json-config",
+        "nl": "vertaling:\nga naar het script\nga naar json-corfig",
+        "fr": "dépendances actualisées\ngo to release script\naller à json-config",
+        "it": "dipendenze aggiornate\nvai a rilasciare lo script\nvai a json-config",
+        "es": "dependencias actualizadas\ngo to release script\nir a json-config",
+        "pl": "zależności aktualizacji\nuruchomić scenariusz\njson-config",
+        "uk": "оновлені залежності\nперейти до запуску сценарію\nперейти до json-config",
+        "zh-cn": "二. 最新依赖\n新闻稿\n即将到来"
+      },
+      "0.0.1": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版",
+        "uk": "початковий випуск"
+      },
+      "0.0.2": {
+        "en": "added engine and prepared for review",
+        "de": "Motor hinzugefügt und zur Überprüfung vorbereitet",
+        "ru": "добавлен движок и подготовлен к обзору",
+        "pt": "motor adicionado e preparado para revisão",
+        "nl": "motor toegevoegd en voorbereid voor beoordeling",
+        "fr": "moteur ajouté et préparé pour examen",
+        "it": "motore aggiunto e preparato per la revisione",
+        "es": "Motor añadido y preparado para revisión.",
+        "pl": "dodano silnik i przygotowano do przeglądu",
+        "uk": "додано движок і підготовлено до перегляду",
+        "zh-cn": "添加引擎并准备审查"
+      },
+      "0.0.3": {
+        "en": "fixed comments from code review",
+        "de": "Kommentare aus der Codeüberprüfung behoben",
+        "ru": "исправлены комментарии из проверки кода",
+        "pt": "comentários corrigidos da revisão de código",
+        "nl": "opgeloste opmerkingen van codebeoordeling",
+        "fr": "commentaires corrigés lors de la révision du code",
+        "it": "commenti corretti dalla revisione del codice",
+        "es": "comentarios fijos de la revisión del código",
+        "pl": "naprawiono komentarze z przeglądu kodu",
+        "uk": "виправлені коментарі під час перевірки коду",
+        "zh-cn": "修正了代码审查的评论"
+      }
     },
-    "native": {
-        "port": 6454,
-        "bind": "0.0.0.0",
-        "net": 0,
-        "subNet": 0,
-        "universe": 0,
-        "packetDelay": 10,
-        "maxDmxAddress": 512
+    "title": "Art-Net Recorder and Player",
+    "titleLang": {
+      "en": "Art-Net Recorder and Player",
+      "de": "Art-Net Recorder und Player",
+      "ru": "Рекордер и плеер Art-Net",
+      "pt": "Gravador e reprodutor Art-Net",
+      "nl": "Art-Net-recorder en speler",
+      "fr": "Enregistreur et lecteur Art-Net",
+      "it": "Registratore e lettore Art-Net",
+      "es": "Grabador y reproductor Art-Net",
+      "pl": "Rejestrator i odtwarzacz Art-Net",
+      "zh-cn": "Art-Net 录音机和播放器",
+      "uk": "Запис і програвач Art-Net"
     },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "Device or service connected",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
+    "desc": {
+      "en": "Record Art-Net data to a file for later playback",
+      "de": "Art-Net-Daten zur späteren Wiedergabe in einer Datei aufzeichnen",
+      "ru": "Запишите данные Art-Net в файл для последующего воспроизведения",
+      "pt": "Grave dados Art-Net em um arquivo para reprodução posterior",
+      "nl": "Art-Net-gegevens opnemen in een bestand om later af te spelen",
+      "fr": "Enregistrez les données Art-Net dans un fichier pour une lecture ultérieure",
+      "it": "Registra i dati Art-Net in un file per la riproduzione successiva",
+      "es": "Grabe los datos de Art-Net en un archivo para su posterior reproducción",
+      "pl": "Nagraj dane Art-Net do pliku w celu późniejszego odtworzenia",
+      "zh-cn": "将 Art-Net 数据记录到文件中供以后播放",
+      "uk": "Запишіть дані Art-Net у файл для подальшого відтворення"
+    },
+    "authors": [
+      "Bannsaenger <bannsaenger@gmx.de>"
+    ],
+    "keywords": [
+      "art-net"
+    ],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "artnet-recorder.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/Bannsaenger/ioBroker.artnet-recorder/master/admin/artnet-recorder.png",
+    "readme": "https://github.com/Bannsaenger/ioBroker.artnet-recorder/blob/master/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "lighting",
+    "connectionType": "local",
+    "dataSource": "push",
+    "compact": true,
+    "materialize": true,
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.19"
+      }
+    ],
+    "globalDependecies": [
+      {
+        "admin": ">=5.1.28"
+      }
     ]
+  },
+  "native": {
+    "port": 6454,
+    "bind": "0.0.0.0",
+    "net": 0,
+    "subNet": 0,
+    "universe": 0,
+    "packetDelay": 10,
+    "maxDmxAddress": 512
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Device or service connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
 }
