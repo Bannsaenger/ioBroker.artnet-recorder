@@ -1,0 +1,19 @@
+{
+    "options": "opciones",
+    "IP": "IP",
+    "IP address to bind the port to": "Dirección IP para vincular el puerto",
+    "Port": "Puerto",
+    "listen at this UDP port": "escuchar en este puerto UDP",
+    "net": "Neto",
+    "the net ID": "la identificación neta",
+    "subNet": "Subred",
+    "the sub net ID": "el ID de la subred",
+    "universe": "Universo DMX",
+    "The used DMX universe": "El universo DMX usado",
+    "packetDelay": "Retraso de paquetes",
+    "packet lookup timer (in ms)": "temporizador de búsqueda de paquetes (en ms)",
+    "packetDelay_tooltip": "40 ms corresponden a un máximo de 25 paquetes ArtDMX por segundo. Número de paquetes = 1000 dividido por el retraso del paquete. Mejor aprovecha el medio tiempo",
+    "maxDmxAddress": "Dirección DMX máxima",
+    "maximum DMX address which will be sent and received": "dirección DMX máxima que será enviada y recibida",
+    "maxDmxAddress_tooltip": "también para el mecanismo de fusión. Ninguna dirección mayor que este valor será reconocida, enviada o procesada"
+}

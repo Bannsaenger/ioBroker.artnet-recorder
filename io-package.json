@@ -13,13 +13,34 @@
                 "it": "Versione iniziale",
                 "es": "Versión inicial",
                 "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
+                "zh-cn": "首次出版",
+                "uk": "початковий випуск"
             },
             "0.0.2": {
-                "en": "added engine and prepared for review"
+                "en": "added engine and prepared for review",
+                "de": "Motor hinzugefügt und zur Überprüfung vorbereitet",
+                "ru": "добавлен движок и подготовлен к обзору",
+                "pt": "motor adicionado e preparado para revisão",
+                "nl": "motor toegevoegd en voorbereid voor beoordeling",
+                "fr": "moteur ajouté et préparé pour examen",
+                "it": "motore aggiunto e preparato per la revisione",
+                "es": "Motor añadido y preparado para revisión.",
+                "pl": "dodano silnik i przygotowano do przeglądu",
+                "uk": "додано движок і підготовлено до перегляду",
+                "zh-cn": "添加引擎并准备审查"
             },
             "0.0.3": {
-                "en": "fixed comments from code review"
+                "en": "fixed comments from code review",
+                "de": "Kommentare aus der Codeüberprüfung behoben",
+                "ru": "исправлены комментарии из проверки кода",
+                "pt": "comentários corrigidos da revisão de código",
+                "nl": "opgeloste opmerkingen van codebeoordeling",
+                "fr": "commentaires corrigés lors de la révision du code",
+                "it": "commenti corretti dalla revisione del codice",
+                "es": "comentarios fijos de la revisión del código",
+                "pl": "naprawiono komentarze z przeglądu kodu",
+                "uk": "виправлені коментарі під час перевірки коду",
+                "zh-cn": "修正了代码审查的评论"
             }
         },
         "title": "Art-Net Recorder and Player",
@@ -33,7 +54,8 @@
             "it": "Registratore e lettore Art-Net",
             "es": "Grabador y reproductor Art-Net",
             "pl": "Rejestrator i odtwarzacz Art-Net",
-            "zh-cn": "Art-Net 录音机和播放器"
+            "zh-cn": "Art-Net 录音机和播放器",
+            "uk": "Запис і програвач Art-Net"
         },
         "desc": {
             "en": "Record Art-Net data to a file for later playback",
@@ -45,7 +67,8 @@
             "it": "Registra i dati Art-Net in un file per la riproduzione successiva",
             "es": "Grabe los datos de Art-Net en un archivo para su posterior reproducción",
             "pl": "Nagraj dane Art-Net do pliku w celu późniejszego odtworzenia",
-            "zh-cn": "将 Art-Net 数据记录到文件中供以后播放"
+            "zh-cn": "将 Art-Net 数据记录到文件中供以后播放",
+            "uk": "Запишіть дані Art-Net у файл для подальшого відтворення"
         },
         "authors": [
             "Bannsaenger <bannsaenger@gmx.de>"
@@ -67,9 +90,17 @@
         "dataSource": "push",
         "compact": true,
         "materialize": true,
+        "adminUI": {
+            "config": "json"
+        },
         "dependencies": [
             {
-                "js-controller": ">=2.0.0"
+                "js-controller": ">=3.3.19"
+            }
+        ],
+        "globalDependecies": [
+            {
+                "admin": ">=5.1.28"
             }
         ]
     },

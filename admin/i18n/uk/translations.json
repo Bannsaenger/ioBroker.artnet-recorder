@@ -1,0 +1,19 @@
+{
+    "options": "параметри",
+    "IP": "IP",
+    "IP address to bind the port to": "IP-адреса для прив’язки порту",
+    "Port": "Порт",
+    "listen at this UDP port": "слухати через цей порт UDP",
+    "net": "Чистий",
+    "the net ID": "ідентифікатор мережі",
+    "subNet": "Підмережа",
+    "the sub net ID": "ідентифікатор підмережі",
+    "universe": "DMX-Всесвіт",
+    "The used DMX universe": "Використаний всесвіт DMX",
+    "packetDelay": "Затримка пакета",
+    "packet lookup timer (in ms)": "таймер пошуку пакетів (у мс)",
+    "packetDelay_tooltip": "40 мс відповідає максимум 25 пакетам ArtDMX на секунду. Кількість пакетів = 1000 поділена на затримку пакета. Краще використати половину часу",
+    "maxDmxAddress": "максимальна адреса DMX",
+    "maximum DMX address which will be sent and received": "максимальна адреса DMX, яка буде надіслана та отримана",
+    "maxDmxAddress_tooltip": "також для механізму злиття. Жодна адреса, яка перевищує це значення, не буде розпізнана, надіслана чи оброблена"
+}

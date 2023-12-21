@@ -1,0 +1,19 @@
+{
+    "options": "opties",
+    "IP": "IK P",
+    "IP address to bind the port to": "IP-adres waaraan de poort moet worden gekoppeld",
+    "Port": "Haven",
+    "listen at this UDP port": "luister op deze UDP-poort",
+    "net": "Netto",
+    "the net ID": "de netto-ID",
+    "subNet": "Sub-net",
+    "the sub net ID": "de subnet-ID",
+    "universe": "DMX-universum",
+    "The used DMX universe": "Het gebruikte DMX-universum",
+    "packetDelay": "Pakketvertraging",
+    "packet lookup timer (in ms)": "pakketopzoektimer (in ms)",
+    "packetDelay_tooltip": "40 ms komt overeen met maximaal 25 ArtDMX-pakketten per seconde. Aantal pakketten = 1000 gedeeld door pakketvertraging. Gebruik liever de helft van de tijd",
+    "maxDmxAddress": "maximaal DMX-adres",
+    "maximum DMX address which will be sent and received": "maximale DMX-adres dat wordt verzonden en ontvangen",
+    "maxDmxAddress_tooltip": "ook voor het samenvoegmechanisme. Geen enkel adres groter dan deze waarde wordt herkend, verzonden of verwerkt"
+}

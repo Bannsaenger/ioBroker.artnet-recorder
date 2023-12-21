@@ -1,0 +1,19 @@
+{
+    "options": "choix",
+    "IP": "PI",
+    "IP address to bind the port to": "Adresse IP à laquelle lier le port",
+    "Port": "Port",
+    "listen at this UDP port": "écoutez ce port UDP",
+    "net": "Filet",
+    "the net ID": "l'identifiant net",
+    "subNet": "Sous-réseau",
+    "the sub net ID": "l'identifiant du sous-réseau",
+    "universe": "Univers DMX",
+    "The used DMX universe": "L'univers DMX utilisé",
+    "packetDelay": "Retard de paquet",
+    "packet lookup timer (in ms)": "temporisateur de recherche de paquets (en ms)",
+    "packetDelay_tooltip": "40 ms correspondent à un maximum de 25 paquets ArtDMX par seconde. Nombre de paquets = 1 000 divisé par le délai des paquets. Mieux vaut utiliser la mi-temps",
+    "maxDmxAddress": "Adresse DMX maximale",
+    "maximum DMX address which will be sent and received": "adresse DMX maximale qui sera envoyée et reçue",
+    "maxDmxAddress_tooltip": "également pour le mécanisme de fusion. Aucune adresse supérieure à cette valeur ne sera ni reconnue ni envoyée ni traitée"
+}

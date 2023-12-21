@@ -1,0 +1,19 @@
+{
+    "options": "options",
+    "IP": "IP",
+    "IP address to bind the port to": "IP address to bind the port to",
+    "Port": "Port",
+    "listen at this UDP port": "listen at this UDP port",
+    "net": "Net",
+    "the net ID": "the net ID",
+    "subNet": "Sub-Net",
+    "the sub net ID": "the sub net ID",
+    "universe": "DMX-Universe",
+    "The used DMX universe": "The used DMX universe",
+    "packetDelay": "Packet Delay",
+    "packet lookup timer (in ms)": "packet lookup timer (in ms)",
+    "packetDelay_tooltip": "40 ms corresponds to a maximum of 25 ArtDMX packets per second. Number of packets = 1000 divided by packet delay. Better use the half time",
+    "maxDmxAddress": "maximum DMX Address",
+    "maximum DMX address which will be sent and received": "maximum DMX address which will be sent and received",
+    "maxDmxAddress_tooltip": "also for the merge mechanism. No address greater than this value will be whether recognised or sent nor processed"
+}

@@ -1,0 +1,19 @@
+{
+    "options": "选项",
+    "IP": "知识产权",
+    "IP address to bind the port to": "端口绑定的IP地址",
+    "Port": "港口",
+    "listen at this UDP port": "监听这个UDP端口",
+    "net": "网",
+    "the net ID": "网络ID",
+    "subNet": "子网",
+    "the sub net ID": "子网ID",
+    "universe": "DMX 宇宙",
+    "The used DMX universe": "使用的 DMX 宇宙",
+    "packetDelay": "数据包延迟",
+    "packet lookup timer (in ms)": "数据包查找计时器（以毫秒为单位）",
+    "packetDelay_tooltip": "40 毫秒相当于每秒最多 25 个 ArtDMX 数据包。数据包数量 = 1000 除以数据包延迟。最好利用半场时间",
+    "maxDmxAddress": "最大DMX地址",
+    "maximum DMX address which will be sent and received": "将发送和接收的最大 DMX 地址",
+    "maxDmxAddress_tooltip": "也适用于合并机制。大于此值的地址将不会被识别、发送或处理"
+}
