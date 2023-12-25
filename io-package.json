@@ -4,8 +4,8 @@
     "version": "0.0.4",
     "news": {
       "0.0.4": {
-        "en": "updated dependencies\ngo to release script\ngo to json-config",
-        "de": "aktualisierte abhängigkeiten\ngo to release script\ngehen zu json-config",
+        "en": "updated dependencies\nswitched to release script\nswitched to json-config",
+        "de": "aktualisierte abhängigkeiten\numgestellt auf release script\numgestellt auf json-config",
         "ru": "обновленные зависимости\nперейти к скрипту\nперейти на json-config",
         "pt": "dependências atualizadas\nir para o script de lançamento\nir para json-config",
         "nl": "vertaling:\nga naar het script\nga naar json-corfig",
@@ -16,18 +16,18 @@
         "uk": "оновлені залежності\nперейти до запуску сценарію\nперейти до json-config",
         "zh-cn": "二. 最新依赖\n新闻稿\n即将到来"
       },
-      "0.0.1": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung",
-        "ru": "Начальная версия",
-        "pt": "lançamento inicial",
-        "nl": "Eerste uitgave",
-        "fr": "Première version",
-        "it": "Versione iniziale",
-        "es": "Versión inicial",
-        "pl": "Pierwsze wydanie",
-        "zh-cn": "首次出版",
-        "uk": "початковий випуск"
+      "0.0.3": {
+        "en": "fixed comments from code review",
+        "de": "Kommentare aus der Codeüberprüfung behoben",
+        "ru": "исправлены комментарии из проверки кода",
+        "pt": "comentários corrigidos da revisão de código",
+        "nl": "opgeloste opmerkingen van codebeoordeling",
+        "fr": "commentaires corrigés lors de la révision du code",
+        "it": "commenti corretti dalla revisione del codice",
+        "es": "comentarios fijos de la revisión del código",
+        "pl": "naprawiono komentarze z przeglądu kodu",
+        "uk": "виправлені коментарі під час перевірки коду",
+        "zh-cn": "修正了代码审查的评论"
       },
       "0.0.2": {
         "en": "added engine and prepared for review",
@@ -42,18 +42,18 @@
         "uk": "додано движок і підготовлено до перегляду",
         "zh-cn": "添加引擎并准备审查"
       },
-      "0.0.3": {
-        "en": "fixed comments from code review",
-        "de": "Kommentare aus der Codeüberprüfung behoben",
-        "ru": "исправлены комментарии из проверки кода",
-        "pt": "comentários corrigidos da revisão de código",
-        "nl": "opgeloste opmerkingen van codebeoordeling",
-        "fr": "commentaires corrigés lors de la révision du code",
-        "it": "commenti corretti dalla revisione del codice",
-        "es": "comentarios fijos de la revisión del código",
-        "pl": "naprawiono komentarze z przeglądu kodu",
-        "uk": "виправлені коментарі під час перевірки коду",
-        "zh-cn": "修正了代码审查的评论"
+      "0.0.1": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版",
+        "uk": "початковий випуск"
       }
     },
     "title": "Art-Net Recorder and Player",

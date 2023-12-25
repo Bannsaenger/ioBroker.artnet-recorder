@@ -29,10 +29,13 @@ The interval or the stepping to send the data ist set by the configuartion.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Bannsaenger) added releaseconfig
+
 ### 0.0.4 (2023-12-21)
 * (Bannsaenger) updated dependencies
-* (Bannsaenger) go to release script
-* (Bannsaenger) go to json-config
+* (Bannsaenger) switched to release script
+* (Bannsaenger) switched to json-config
 
 ### 0.0.3
 * (Bannsaenger) fixed comments from code review
