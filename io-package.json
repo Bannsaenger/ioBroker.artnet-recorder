@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "artnet-recorder",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "news": {
+      "0.0.5": {
+        "en": "added releaseconfig",
+        "de": "pressemitteilungconfig",
+        "ru": "добавлено releaseconfig",
+        "pt": "adicionado releaseconfig",
+        "nl": "vertaling:",
+        "fr": "releaseconfig",
+        "it": "aggiunto releaseconfig",
+        "es": "add releaseconfig",
+        "pl": "dodać",
+        "uk": "javascript licenses api веб-сайт",
+        "zh-cn": "增加释放"
+      },
       "0.0.4": {
         "en": "updated dependencies\nswitched to release script\nswitched to json-config",
         "de": "aktualisierte abhängigkeiten\numgestellt auf release script\numgestellt auf json-config",
