@@ -56,9 +56,7 @@ class ArtnetRecorder extends utils.Adapter {
 		this.plyFile = '';                                                                      // the file which is opened for playback
 		this.mergeMode = 0;                                                                     // 0 = LTP, 1 = HTP
 		this.liner = undefined;                                                                 // holds the lineByLine object
-		this.tmrSendTimer = setTimeout(() => {
-		});
-		this.tmrSendTimer.unref();                                                              // holds the send timer for clear in unload
+		this.tmrSendTimer;																		// holds the send timer for clear in unload
 
 		// creating a udp server
 		this.server = udp.createSocket('udp4');
