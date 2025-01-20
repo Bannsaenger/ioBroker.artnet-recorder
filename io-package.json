@@ -69,7 +69,6 @@
         "uk": "початковий випуск"
       }
     },
-    "title": "Art-Net Recorder and Player",
     "titleLang": {
       "en": "Art-Net Recorder and Player",
       "de": "Art-Net Recorder und Player",
@@ -102,9 +101,12 @@
     "keywords": [
       "art-net"
     ],
-    "license": "MIT",
+    "licenseInformation": {
+      "link": "https://github.com/Bannsaenger/ioBroker.artnet-recorder/blob/master/LICENSE",
+      "type": "free",
+      "license": "MIT"
+    },
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "artnet-recorder.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/Bannsaenger/ioBroker.artnet-recorder/master/admin/artnet-recorder.png",
@@ -112,21 +114,21 @@
     "loglevel": "info",
     "mode": "daemon",
     "type": "lighting",
+    "tier": 3,
+    "compact": true,
     "connectionType": "local",
     "dataSource": "push",
-    "compact": true,
-    "materialize": true,
     "adminUI": {
       "config": "json"
     },
     "dependencies": [
       {
-        "js-controller": ">=3.3.19"
+        "js-controller": ">=5.0.19"
       }
     ],
     "globalDependecies": [
       {
-        "admin": ">=5.1.28"
+        "admin": ">=5.3.2"
       }
     ]
   },
