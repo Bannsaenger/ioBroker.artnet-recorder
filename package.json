@@ -41,7 +41,7 @@
     "@types/sinon": "^17.0.3",
     "@types/sinon-chai": "^4.0.0",
     "globals": "^14.0.0",
-    "chai": "^4.4.1",
+    "chai": "^5.1.2",
     "chai-as-promised": "^7.1.1",
     "dgram": "^1.0.1",
     "eslint": "^9.18.0",
