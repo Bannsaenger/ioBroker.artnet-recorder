@@ -29,6 +29,9 @@ The interval or the stepping to send the data ist set by the configuartion.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### 0.1.1 (2025-01-21)
+* (Bannsaenger) removed script build on deploy
+
 ### 0.1.0 (2025-01-21)
 * (Bannsaenger) updated dependencies, scripts, eslint 9
 * (Bannsaenger) tested with node v22.13.0
@@ -44,9 +47,6 @@ The interval or the stepping to send the data ist set by the configuartion.
 
 ### 0.0.3
 * (Bannsaenger) fixed comments from code review
-
-### 0.0.2
-* (Bannsaenger) added engine and prepared for review
 
 ## License
 MIT License
