@@ -1,6 +1,6 @@
 {
   "name": "iobroker.artnet-recorder",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Record Art-Net data to a file for later playback",
   "author": {
     "name": "Bannsaenger",
@@ -79,8 +79,8 @@
     "lint": "eslint -c eslint.config.mjs .",
     "translate": "translate-adapter",
     "release": "release-script patch --all --verbose -p iobroker license",
-    "release-minor": "release-script minor --all --verbose -p iobroker license",
-    "release-major": "release-script major --all --verbose -p iobroker license changelog"
+    "release-minor": "release-script minor --all --verbose -p iobroker license manual-review",
+    "release-major": "release-script major --all --verbose -p iobroker license changelog manual-review"
   },
   "bugs": {
     "url": "https://github.com/Bannsaenger/ioBroker.artnet-recorder/issues"
