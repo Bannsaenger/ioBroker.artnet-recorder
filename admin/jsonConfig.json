@@ -1,6 +1,9 @@
 {
     "i18n": true,
     "type": "tabs",
+    "tabsStyle": {
+        "width": "calc(100% - 100px)"
+    },
     "items": {
         "_options": {
             "type": "panel",
@@ -10,9 +13,11 @@
                     "type": "ip",
                     "listenOnAllPorts": true,
                     "onlyIp4": true,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 4,
+                    "xl": 4,
                     "label": "IP",
                     "help": "IP address to bind the port to"
                 },
@@ -20,9 +25,11 @@
                     "type": "number",
                     "min": 1,
                     "max": 65565,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 2,
+                    "xl": 2,
                     "label": "Port",
                     "help": "listen at this UDP port"
                 },
@@ -31,9 +38,11 @@
                     "min": 0,
                     "max": 127,
                     "step": 1,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 2,
+                    "xl": 2,
                     "label": "the net ID",
                     "newLine": true
                 },
@@ -42,9 +51,11 @@
                     "min": 0,
                     "max": 15,
                     "step": 1,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 2,
+                    "xl": 2,
                     "label": "the sub net ID"
                 },
                 "universe": {
@@ -52,9 +63,11 @@
                     "min": 0,
                     "max": 15,
                     "step": 1,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 2,
+                    "xl": 2,
                     "label": "The used DMX universe"
                 },
                 "packetDelay": {
@@ -62,9 +75,11 @@
                     "min": 1,
                     "max": 10000,
                     "step": 1,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 2,
+                    "xl": 2,
                     "label": "packet lookup timer (in ms)",
                     "help": "packetDelay_tooltip",
                     "newLine": true
@@ -74,9 +89,11 @@
                     "min": 2,
                     "max": 512,
                     "step": 1,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 2,
+                    "xl": 2,
                     "label": "maximum DMX address which will be sent and received",
                     "help": "maxDmxAddress_tooltip"
                 }
