@@ -4,30 +4,17 @@
     "version": "0.1.1",
     "news": {
       "0.1.1": {
-        "en": "removed script build on deploy",
-        "de": "entferntes script auf der bereitstellung",
-        "ru": "удаление скрипта",
-        "pt": "removeu o script build em implantar",
-        "nl": "verwijderd script gebouwd op implementatie",
-        "fr": "supprimé script build sur déploiement",
-        "it": "build di script rimosso su dispiegamento",
-        "es": "script eliminado construir sobre el despliegue",
-        "pl": "usunięty skrypt build on implementation",
-        "uk": "вилучений скрипт побудови на розгортання",
-        "zh-cn": "删除的脚本基于部署"
-      },
-      "0.1.0": {
-        "en": "updated dependencies, scripts, eslint 9\ntested with node v22.13.0\njsonConfig tested for responsive design",
-        "de": "aktualisierte abhängigkeiten, skripte, eslint 9\ngetestet mit knoten v22.13.0\njsonConfig getestet für responsive Design",
-        "ru": "обновленные зависимости, скрипты, eslint 9\nиспытан на узле v22.13.0\njsonConfig тестируется на адаптивный дизайн",
-        "pt": "dependências atualizadas, scripts, eslint 9\ntestado com nó v22.13.0\njsonConfig testado para design responsivo",
-        "nl": "bijgewerkte afhankelijkheden, scripts, eslint 9\ngetest met knooppunt v22.13.0\njsonConfig getest op responsief ontwerp",
-        "fr": "mises à jour dépendances, scripts, eslint 9\ntesté avec le nœud v22.13.0\njsonConfig testé pour un design réactif",
-        "it": "dipendenze aggiornate, script, eslint 9\ntestato con nodo v22.13.0\njsonConfig testato per design reattivo",
-        "es": "dependencias actualizadas, scripts, eslint 9\nprobado con nodo v22.13.0\njsonConfig probado para el diseño sensible",
-        "pl": "zaktualizowane zależności, skrypty, eslint 9\ntestowane z węzłem v22.13.0\njsonConfig testowany dla responsive design",
-        "uk": "оновлені залежності, сценарії, eslint 9\nвипробувано з вершиною v22.13.0\njsonConfig протестований для адаптивного дизайну",
-        "zh-cn": "更新的依赖关系、 脚本、 eslint 9\n用节点测试 v22.13.0\njsonConfig 测试反应设计"
+        "en": "updated dependencies, scripts, eslint 9\ntested with node v22.13.0\njsonConfig tested for responsive design\nremoved script build on deploy",
+        "de": "aktualisierte abhängigkeiten, skripte, eslint 9\ngetestet mit knoten v22.13.0\njsonConfig getestet für responsive Design\nentferntes script auf der bereitstellung",
+        "ru": "обновленные зависимости, скрипты, eslint 9\nиспытан на узле v22.13.0\njsonConfig тестируется на адаптивный дизайн\nудаление скрипта",
+        "pt": "dependências atualizadas, scripts, eslint 9\ntestado com nó v22.13.0\njsonConfig testado para design responsivo\nremoveu o script build em implantar",
+        "nl": "bijgewerkte afhankelijkheden, scripts, eslint 9\ngetest met knooppunt v22.13.0\njsonConfig getest op responsief ontwerp\nverwijderd script gebouwd op implementatie",
+        "fr": "mises à jour dépendances, scripts, eslint 9\ntesté avec le nœud v22.13.0\njsonConfig testé pour un design réactif\nsupprimé script build sur déploiement",
+        "it": "dipendenze aggiornate, script, eslint 9\ntestato con nodo v22.13.0\njsonConfig testato per design reattivo\nbuild di script rimosso su dispiegamento",
+        "es": "dependencias actualizadas, scripts, eslint 9\nprobado con nodo v22.13.0\njsonConfig probado para el diseño sensible\nscript eliminado construir sobre el despliegue",
+        "pl": "zaktualizowane zależności, skrypty, eslint 9\ntestowane z węzłem v22.13.0\njsonConfig testowany dla responsive design\nusunięty skrypt build on implementation",
+        "uk": "оновлені залежності, сценарії, eslint 9\nвипробувано з вершиною v22.13.0\njsonConfig протестований для адаптивного дизайну\nвилучений скрипт побудови на розгортання",
+        "zh-cn": "更新的依赖关系、 脚本、 eslint 9\n用节点测试 v22.13.0\njsonConfig 测试反应设计\n删除的脚本基于部署"
       },
       "0.0.5": {
         "en": "added releaseconfig",
