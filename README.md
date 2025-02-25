@@ -29,7 +29,7 @@ The interval or the stepping to send the data ist set by the configuartion.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.2 (2025-02-25)
 * (Bannsaenger) updated admin dependency
 
 ### 0.1.1 (2025-01-21)
@@ -47,9 +47,6 @@ The interval or the stepping to send the data ist set by the configuartion.
 * (Bannsaenger) updated dependencies
 * (Bannsaenger) switched to release script
 * (Bannsaenger) switched to json-config
-
-### 0.0.3
-* (Bannsaenger) fixed comments from code review
 
 ## License
 MIT License

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "artnet-recorder",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "news": {
+      "0.1.2": {
+        "en": "updated admin dependency",
+        "de": "aktualisierte adminabhängigkeit",
+        "ru": "обновленная зависимость администратора",
+        "pt": "dependência de administrador atualizada",
+        "nl": "bijgewerkte admin afhankelijkheid",
+        "fr": "mise à jour de la dépendance de l'administration",
+        "it": "dipendenza da amministratore aggiornata",
+        "es": "dependencia de administración actualizada",
+        "pl": "zaktualizowana zależność administratora",
+        "uk": "оновлена залежність адміністратора",
+        "zh-cn": "更新管理员依赖性"
+      },
       "0.1.1": {
         "en": "updated dependencies, scripts, eslint 9\ntested with node v22.13.0\njsonConfig tested for responsive design\nremoved script build on deploy",
         "de": "aktualisierte abhängigkeiten, skripte, eslint 9\ngetestet mit knoten v22.13.0\njsonConfig getestet für responsive Design\nentferntes script auf der bereitstellung",
