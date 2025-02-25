@@ -29,6 +29,9 @@ The interval or the stepping to send the data ist set by the configuartion.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Bannsaenger) updated admin dependency
+
 ### 0.1.1 (2025-01-21)
 * (Bannsaenger) removed script build on deploy
 
