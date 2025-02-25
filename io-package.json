@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "artnet-recorder",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "news": {
+      "0.1.3": {
+        "en": "previous relase did not work",
+        "de": "früher relase nicht arbeiten",
+        "ru": "предыдущий relase не работает",
+        "pt": "relé anterior não funcionou",
+        "nl": "vorige relatie werkte niet",
+        "fr": "le relase précédent n'a pas fonctionné",
+        "it": "precedente relase non ha funzionato",
+        "es": "anterior relase no funcionó",
+        "pl": "wcześniejsze przetoczenie nie zadziałało",
+        "uk": "попередній relase не працює",
+        "zh-cn": "前一个折叠器无效"
+      },
       "0.1.2": {
         "en": "updated admin dependency",
         "de": "aktualisierte adminabhängigkeit",
@@ -80,19 +93,6 @@
         "pl": "dodano silnik i przygotowano do przeglądu",
         "uk": "додано движок і підготовлено до перегляду",
         "zh-cn": "添加引擎并准备审查"
-      },
-      "0.0.1": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung",
-        "ru": "Начальная версия",
-        "pt": "lançamento inicial",
-        "nl": "Eerste uitgave",
-        "fr": "Première version",
-        "it": "Versione iniziale",
-        "es": "Versión inicial",
-        "pl": "Pierwsze wydanie",
-        "zh-cn": "首次出版",
-        "uk": "початковий випуск"
       }
     },
     "titleLang": {

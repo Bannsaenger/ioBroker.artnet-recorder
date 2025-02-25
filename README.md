@@ -29,6 +29,9 @@ The interval or the stepping to send the data ist set by the configuartion.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### 0.1.3 (2025-02-25)
+* (Bannsaenger) previous relase did not work
+
 ### 0.1.2 (2025-02-25)
 * (Bannsaenger) updated admin dependency
 
@@ -42,11 +45,6 @@ The interval or the stepping to send the data ist set by the configuartion.
 
 ### 0.0.5 (2023-12-25)
 * (Bannsaenger) added releaseconfig
-
-### 0.0.4 (2023-12-21)
-* (Bannsaenger) updated dependencies
-* (Bannsaenger) switched to release script
-* (Bannsaenger) switched to json-config
 
 ## License
 MIT License
