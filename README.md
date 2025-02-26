@@ -30,7 +30,7 @@ The interval or the stepping to send the data ist set by the configuartion.
     ### **WORK IN PROGRESS**
 -->
 ### 0.1.3 (2025-02-25)
-* (Bannsaenger) previous relase did not work
+* (Bannsaenger) previous release did not work
 
 ### 0.1.2 (2025-02-25)
 * (Bannsaenger) updated admin dependency
