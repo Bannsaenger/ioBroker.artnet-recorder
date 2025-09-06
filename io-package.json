@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "artnet-recorder",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "news": {
+      "0.1.4": {
+        "en": "updated dependencies and issues from repository checker",
+        "de": "aktualisierte abhängigkeiten und probleme von repository checker",
+        "ru": "обновленные зависимости и проблемы из проверки репозитория",
+        "pt": "dependências e problemas atualizados do verificador de repositório",
+        "nl": "bijgewerkte afhankelijkheden en problemen van repository-checker",
+        "fr": "les dépendances et les problèmes mis à jour par le vérificateur du dépôt",
+        "it": "dipendenze aggiornate e problemi da repository checker",
+        "es": "dependencias actualizadas y cuestiones del control del repositorio",
+        "pl": "zaktualizowane zależności i problemy z kontrolerem repozytorium",
+        "uk": "оновлені залежності та питання репозиторійної перевірки",
+        "zh-cn": "从仓库检查器更新的依赖性和问题"
+      },
       "0.1.3": {
         "en": "updated admin dependency\nprevious release did not work",
         "de": "aktualisierte admin Abhängigkeiten\nvorhergehendes Release hat nicht funktioniert",
