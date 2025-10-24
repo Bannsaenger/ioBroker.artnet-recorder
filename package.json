@@ -1,6 +1,6 @@
 {
   "name": "iobroker.artnet-recorder",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Record Art-Net data to a file for later playback",
   "author": {
     "name": "Bannsaenger",

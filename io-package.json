@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "artnet-recorder",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "news": {
+      "0.1.5": {
+        "en": "updated dependencies and issues from repository checker\nmigrate to NPM Trusted Publishing",
+        "de": "aktualisierte abhängigkeiten und probleme von repository checker\nmigrate to NPM Trusted Publishing",
+        "ru": "обновленные зависимости и проблемы из проверки репозитория\nперейти в NPM Trusted Publishing",
+        "pt": "dependências e problemas atualizados do verificador de repositório\nmigrar para a publicação confiável do NPM",
+        "nl": "bijgewerkte afhankelijkheden en problemen van repository-checker\nmigreren naar NPM Trusted Publishing",
+        "fr": "les dépendances et les problèmes mis à jour par le vérificateur du dépôt\nmigrer vers NPM Trusted Publishing",
+        "it": "dipendenze aggiornate e problemi da repository checker\nmigrare a NPM Trusted Publishing",
+        "es": "dependencias actualizadas y cuestiones del control del repositorio\nmigrar a NPM Trusted Publishing",
+        "pl": "zaktualizowane zależności i problemy z kontrolerem repozytorium\nmigracja do NPM Trusted Publishing",
+        "uk": "оновлені залежності та питання репозиторійної перевірки\nmigrate до NPM Trusted Видавництво",
+        "zh-cn": "从仓库检查器更新的依赖性和问题\n向国家预防机制迁移"
+      },
       "0.1.4": {
         "en": "updated dependencies and issues from repository checker",
         "de": "aktualisierte abhängigkeiten und probleme von repository checker",
@@ -80,19 +93,6 @@
         "pl": "naprawiono komentarze z przeglądu kodu",
         "uk": "виправлені коментарі під час перевірки коду",
         "zh-cn": "修正了代码审查的评论"
-      },
-      "0.0.2": {
-        "en": "added engine and prepared for review",
-        "de": "Motor hinzugefügt und zur Überprüfung vorbereitet",
-        "ru": "добавлен движок и подготовлен к обзору",
-        "pt": "motor adicionado e preparado para revisão",
-        "nl": "motor toegevoegd en voorbereid voor beoordeling",
-        "fr": "moteur ajouté et préparé pour examen",
-        "it": "motore aggiunto e preparato per la revisione",
-        "es": "Motor añadido y preparado para revisión.",
-        "pl": "dodano silnik i przygotowano do przeglądu",
-        "uk": "додано движок і підготовлено до перегляду",
-        "zh-cn": "添加引擎并准备审查"
       }
     },
     "titleLang": {

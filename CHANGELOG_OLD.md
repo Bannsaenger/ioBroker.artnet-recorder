@@ -1,4 +1,9 @@
 # Older changes
+## 0.1.0 (2025-01-21)
+* (Bannsaenger) updated dependencies, scripts, eslint 9
+* (Bannsaenger) tested with node v22.13.0
+* (Bannsaenger) jsonConfig tested for responsive design
+
 ## 0.0.5 (2023-12-25)
 * (Bannsaenger) added releaseconfig
 
