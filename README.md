@@ -29,6 +29,10 @@ The interval or the stepping to send the data ist set by the configuartion.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (Bannsaenger) updated dependencies and issues from repository checker
+* (Bannsaenger) migrate to NPM Trusted Publishing
+
 ### 0.1.4 (2025-09-06)
 * (Bannsaenger) updated dependencies and issues from repository checker
 
