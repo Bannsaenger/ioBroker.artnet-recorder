@@ -33,7 +33,7 @@
     "@iobroker/testing": "^5.2.2",
     "@tsconfig/node20": "^20.1.6",
     "@types/node": "^24.10.2",
-    "@iobroker/types": "^7.0.7",
+    "@iobroker/types": "^7.1.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsdoc": "^54.1.1",
