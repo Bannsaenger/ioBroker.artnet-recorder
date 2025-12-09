@@ -42,6 +42,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-unicorn": "^60.0.0",
     "eslint-plugin-import": "^2.32.0",
+    "prettier": "^3.7.4",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0"
   },
