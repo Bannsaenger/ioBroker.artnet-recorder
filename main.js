@@ -2,7 +2,7 @@
  *
  *      iobroker artnet-recorder Adapter
  *
- *      Copyright (c) 2021, Bannsaenger <bannsaenger@gmx.de>
+ *      Copyright (c) 2021-2026, Bannsaenger <bannsaenger@gmx.de>
  *
  *      MIT License
  *
@@ -135,7 +135,7 @@ class ArtnetRecorder extends utils.Adapter {
             this.setState('control.mode', 0, true);
 
             // last thing to do is to start the onSendTimer
-            this.tmrSendTimer = setInterval(this.onSendTimer.bind(this), this.config.packetDelay);
+            this.tmrSendTimer = this.setInterval(this.onSendTimer.bind(this), this.config.packetDelay);
 
             // Set the connection indicator after startup
             // this.setState('info.connection', true, true);
@@ -297,7 +297,7 @@ class ArtnetRecorder extends utils.Adapter {
                 // send packet
                 this.sendPacket();
                 // get next packet or end playback
-                tmpStr = this.liner.next();
+                tmpStr = this.liner.next().toString();
                 if (tmpStr) {
                     tmpObj = JSON.parse(tmpStr);
                     this.nextPacketTime = Number(Object.keys(tmpObj)[0]);
@@ -306,8 +306,8 @@ class ArtnetRecorder extends utils.Adapter {
                     if (this.plyLoop) {
                         this.log.info(`Art-Net Recorder playback end, restart because of loop mode`);
                         this.plyStartTime = Date.now();
-                        this.liner = new lineByLine(this.plyFile, { readChunk: 15000, newLineCharacter: '\n' });
-                        tmpStr = this.liner.next();
+                        this.liner = new lineByLine(this.plyFile, { readChunk: 15000 });
+                        tmpStr = this.liner.next().toString();
                         if (tmpStr) {
                             tmpObj = JSON.parse(tmpStr);
                             this.nextPacketTime = Number(Object.keys(tmpObj)[0]);
@@ -377,12 +377,9 @@ class ArtnetRecorder extends utils.Adapter {
                                     tmpObj = await this.getStateAsync('control.file');
                                     this.plyFile = `${this.workingDir}/${tmpObj && tmpObj.val ? tmpObj.val.toString() : ''}`;
                                     if (fs.existsSync(this.plyFile)) {
-                                        this.liner = new lineByLine(this.plyFile, {
-                                            readChunk: 15000,
-                                            newLineCharacter: '\n',
-                                        });
+                                        this.liner = new lineByLine(this.plyFile, { readChunk: 15000 });
                                         //this.liner.reset();             // when debugging there were sometimes strange effects
-                                        tmpStr = this.liner.next();
+                                        tmpStr = this.liner.next().toString();
                                         if (tmpStr) {
                                             tmpObj = JSON.parse(tmpStr);
                                             this.nextPacketTime = Number(Object.keys(tmpObj)[0]);
