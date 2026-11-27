@@ -1,0 +1,19 @@
+{
+    "IP": "IP",
+    "IP address to bind the port to": "Adres IP, z którym ma zostać powiązany port",
+    "Port": "Port",
+    "The used DMX universe": "Zastosowany wszechświat DMX",
+    "listen at this UDP port": "nasłuchuj na tym porcie UDP",
+    "maxDmxAddress": "maksymalny adres DMX",
+    "maxDmxAddress_tooltip": "także dla mechanizmu scalania. Żaden adres większy niż ta wartość nie zostanie rozpoznany, wysłany ani przetworzony",
+    "maximum DMX address which will be sent and received": "maksymalny adres DMX, który będzie wysyłany i odbierany",
+    "net": "Internet",
+    "options": "opcje",
+    "packet lookup timer (in ms)": "licznik czasu wyszukiwania pakietów (w ms)",
+    "packetDelay": "Opóźnienie pakietu",
+    "packetDelay_tooltip": "40 ms odpowiada maksymalnie 25 pakietom ArtDMX na sekundę. Liczba pakietów = 1000 podzielona przez opóźnienie pakietu. Lepiej wykorzystaj połowę czasu",
+    "subNet": "Podsieć",
+    "the net ID": "identyfikator sieci",
+    "the sub net ID": "identyfikator podsieci",
+    "universe": "Wszechświat DMX"
+}
